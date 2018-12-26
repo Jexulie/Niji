@@ -1,4 +1,4 @@
-package main
+package niji
 
 import (
 	"regexp"
@@ -51,8 +51,25 @@ type RGB struct {
 	B int
 }
 
+// RGBControl c
+func (r RGB) RGBControl() {
+	if r.R < 0 || r.G < 0 || r.B < 0 {
+		panic("Color Values Can Not Be Negative")
+	}
+	if r.R > 255 || r.G > 255 || r.B > 255 {
+		panic("Color Values Can Not Be Higher Than 255")
+	}
+}
+
 // HEX struct
 type HEX string
+
+// HEXControl c
+func HEXControl(s []string) {
+	if len(s) < 3 {
+		panic("Something is Wrong with your Hex!")
+	}
+}
 
 // ToRGB h -> r
 func (h HEX) ToRGB() RGB {
@@ -61,6 +78,7 @@ func (h HEX) ToRGB() RGB {
 		hex := `(?i)^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})`
 		comp := regexp.MustCompile(hex)
 		r := comp.FindStringSubmatch(string(h))
+		HEXControl(r)
 		tr, _ := strconv.ParseInt(r[1], 16, 0)
 		tg, _ := strconv.ParseInt(r[2], 16, 0)
 		tb, _ := strconv.ParseInt(r[3], 16, 0)
@@ -69,24 +87,4 @@ func (h HEX) ToRGB() RGB {
 		x.B = int(tb)
 	}
 	return x
-}
-
-// warning type hexToRGB func(h HEX) RGB
-
-// cmder + -> show helper
-func main() {
-	var a HEX = "#F78393"
-	b := HEX("#85F4B1")
-	c := HEX("#937CC4")
-	d := RGB{R: 225, G: 225, B: 48}
-	e := RGB{R: 41, G: 61, B: 135}
-	f := RGB{R: 174, G: 171, B: 167}
-
-	PrintCustomHEXln(a, "Sample Hex !")
-	PrintCustomHEXln(b, "Sample Hex !")
-	PrintCustomHEXln(c, "Sample Hex !")
-	PrintCustomRGBln(d, "Sample RGB !")
-	PrintCustomRGBln(e, "Sample RGB !")
-	PrintCustomRGBln(f, "Sample RGB !")
-
 }
