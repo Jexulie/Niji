@@ -2,7 +2,7 @@ package main
 
 /*
 Niji - 2018
-* Does Work in Bash & ConEmu
+* Does Work in Bash & ConEmu & Git-Bash
 ! Does not Work in Powershell & Command Prompt
 
 */
@@ -10,13 +10,20 @@ Niji - 2018
 // ESCAPECHAR Escape chars ver 1
 var ESCAPECHAR = "\u001b["
 
+// ESCAPECHARCLOSE Escape char close 1
+var ESCAPECHARCLOSE = "u001b[0m"
+
 // ESCAPECHAR2 Escape chars ver 2
 var ESCAPECHAR2 = "\x1b["
+
+// ESCAPECHARCLOSE2 Escape char close 2
+var ESCAPECHARCLOSE2 = "\x1b[0m"
 
 // ESCAPECHAR3 Escape chars ver 3
 var ESCAPECHAR3 = "\033["
 
-var ESCAPECHARCLOSE = "\033[0m"
+// ESCAPECHARCLOSE3 Escape char close 3
+var ESCAPECHARCLOSE3 = "\033[0m"
 
 // DefaultColors type
 type DefaultColors int
