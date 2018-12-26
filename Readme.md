@@ -11,9 +11,10 @@ $ go get github.com/Jexulie/Niji
 ## How to Use
 ```golang
    // import package
-   import _ "github.com/Jexulie/Niji"
+   import niji "github.com/Jexulie/Niji"
 
-   /* Standart colors
+   func main() {
+    /* Standart colors
         Black,
         Red,
         Green,
@@ -24,25 +25,26 @@ $ go get github.com/Jexulie/Niji
         White
    */
 
-   // returns string
-   str := FormatGreen("Cow")
+      // returns string
+      str := niji.FormatGreen("Cow")
    
-   // prints
-   PrintMagenta("Powerpuff Girls...")
+      // prints
+      niji.PrintMagenta("Powerpuff Girls...")
 
    /* Custom Colors */
 
-   // for HEX 
-   blue := HEX("#4D9FF7")
+      // for HEX 
+      blue := niji.HEX("#4D9FF7")
 
-   // or as short form #49F
+      // or as short form #49F
 
-   PrintCustomHEXln(blue, "Sky")
+      niji.PrintCustomHEXln(blue, "Sky")
 
-   // for RGB
-   red := RGB{R: 255, G: 0, B: 0}
+      // for RGB
+      red := niji.RGB{R: 255, G: 0, B: 0}
 
-   PrintCustomRGBln(red, "Rawrr!")
+      niji.PrintCustomRGBln(red, "Rawrr!")
+   }
 
 
 ```
