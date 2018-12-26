@@ -1,17 +1,21 @@
 package main
 
+import (
+	"regexp"
+	"strconv"
+)
+
 /*
-Niji - 2018
+* Niji - 2018
 * Does Work in Bash & ConEmu & Git-Bash
 ! Does not Work in Powershell & Command Prompt
-
 */
 
 // ESCAPECHAR Escape chars ver 1
 var ESCAPECHAR = "\u001b["
 
 // ESCAPECHARCLOSE Escape char close 1
-var ESCAPECHARCLOSE = "u001b[0m"
+var ESCAPECHARCLOSE = "\u001b[0m"
 
 // ESCAPECHAR2 Escape chars ver 2
 var ESCAPECHAR2 = "\x1b["
@@ -25,12 +29,12 @@ var ESCAPECHAR3 = "\033["
 // ESCAPECHARCLOSE3 Escape char close 3
 var ESCAPECHARCLOSE3 = "\033[0m"
 
-// DefaultColors type
-type DefaultColors int
+// Niji type
+type Niji int
 
-// DefaultColors Enum
+// Niji Enum
 const (
-	Black DefaultColors = iota + 30
+	Black Niji = iota + 30
 	Red
 	Green
 	Yellow
@@ -47,16 +51,42 @@ type RGB struct {
 	B int
 }
 
+// HEX struct
+type HEX string
+
+// ToRGB h -> r
+func (h HEX) ToRGB() RGB {
+	var x RGB
+	if len(h) == 7 || len(h) == 4 {
+		hex := `(?i)^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})`
+		comp := regexp.MustCompile(hex)
+		r := comp.FindStringSubmatch(string(h))
+		tr, _ := strconv.ParseInt(r[1], 16, 0)
+		tg, _ := strconv.ParseInt(r[2], 16, 0)
+		tb, _ := strconv.ParseInt(r[3], 16, 0)
+		x.R = int(tr)
+		x.G = int(tg)
+		x.B = int(tb)
+	}
+	return x
+}
+
+// warning type hexToRGB func(h HEX) RGB
+
 // cmder + -> show helper
 func main() {
-	green := RGB{R: 130, G: 236, B: 99}
-	PrintCustomln(green, "Hulu Hala day!")
-	// fmt.Println(FormatBlueln("This is Blue"))
-	// fmt.Println(FormatBlackln("This is Black"))
-	// fmt.Println(FormatRedln("This is Red"))
-	// fmt.Println(FormatGreenln("This is Green"))
-	// fmt.Println(FormatYellowln("This is Yellow"))
-	// fmt.Println(FormatMagentaln("This is Magenta"))
-	// fmt.Println(FormatCyanln("This is Cyan"))
-	// fmt.Println(FormatWhiteln("This is White"))
+	var a HEX = "#F78393"
+	b := HEX("#85F4B1")
+	c := HEX("#937CC4")
+	d := RGB{R: 225, G: 225, B: 48}
+	e := RGB{R: 41, G: 61, B: 135}
+	f := RGB{R: 174, G: 171, B: 167}
+
+	PrintCustomHEXln(a, "Sample Hex !")
+	PrintCustomHEXln(b, "Sample Hex !")
+	PrintCustomHEXln(c, "Sample Hex !")
+	PrintCustomRGBln(d, "Sample RGB !")
+	PrintCustomRGBln(e, "Sample RGB !")
+	PrintCustomRGBln(f, "Sample RGB !")
+
 }
