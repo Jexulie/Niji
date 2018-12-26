@@ -10,6 +10,9 @@ $ go get github.com/Jexulie/Niji
 
 ## How to Use
 ```golang
+   // import package
+   import _ "github.com/Jexulie/Niji"
+
    /* Standart colors
         Black,
         Red,
